@@ -20,17 +20,27 @@
         <main class="p-4">
             
             <div class="mb-6 grid grid-cols-2 gap-3">
-                <div class="p-3 bg-green-50 rounded-xl border border-green-200">
-                    <h3 class="text-[10px] font-bold text-green-800 uppercase tracking-wider">Esta Semana</h3>
-                    <p class="text-xs text-gray-600 mt-1">Ingresos: <span class="font-bold text-gray-900">${{ ventas_semana }}</span></p>
-                    <p class="text-xs text-gray-600">Ganancia: <span class="font-bold text-green-600">${{ ganancia_semana }}</span></p>
-                </div>
-                <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
-                    <h3 class="text-[10px] font-bold text-purple-800 uppercase tracking-wider">Este Mes</h3>
-                    <p class="text-xs text-gray-600 mt-1">Ingresos: <span class="font-bold text-gray-900">${{ ventas_mes }}</span></p>
-                    <p class="text-xs text-gray-600">Ganancia: <span class="font-bold text-purple-600">${{ ganancia_mes }}</span></p>
-                </div>
-            </div>
+    <div class="p-3 bg-green-50 rounded-xl border border-green-200">
+        <h3 class="text-[10px] font-bold text-green-800 uppercase tracking-wider">Esta Semana</h3>
+        <p class="text-xs text-gray-600 mt-1">Ingresos: <span class="font-bold text-gray-900">${{ ventas_semana }}</span></p>
+        <p class="text-xs text-gray-600">Ganancia: <span class="font-bold text-green-600">${{ ganancia_semana }}</span></p>
+    </div>
+    
+    <!-- Tarjeta Este Mes -->
+    <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+        <h3 class="text-[10px] font-bold text-purple-800 uppercase tracking-wider">Este Mes</h3>
+        <p class="text-xs text-gray-600 mt-1">Ingresos: <span class="font-bold text-gray-900">${{ ventas_mes }}</span></p>
+        <p class="text-xs text-gray-600">Ganancia: <span class="font-bold text-purple-600">${{ ganancia_mes }}</span></p>
+    </div>
+    
+    <div class="col-span-2 mt-2 flex justify-end">
+        <form action="/resetear_ventas" method="post">
+            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-sm shadow-sm" onclick="return confirm('¿Estás segura de borrar todo el historial de ventas? Esto dejará las ganancias en $0.');">
+                Resetear Ganancias
+            </button>
+        </form>
+    </div>
+</div>
 
             <div class="mb-6 p-4 bg-blue-50 rounded-xl border border-blue-100">
                 <h2 class="text-sm font-bold text-blue-800 uppercase tracking-wider mb-3">Añadir Producto</h2>
@@ -66,6 +76,12 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="font-bold text-lg leading-tight">{{ p.nombre }}</p>
+                                <form action="/eliminar_producto" method="post" class="inline-block ml-2">
+                                <input type="hidden" name="producto_id" value="{{ p.id }}">
+                                <button type="submit" class="text-sm text-red-500 hover:text-red-700 font-bold" onclick="return confirm('¿Seguro que quieres eliminar este producto?');">
+                                    Eliminar
+    </button>
+</form>
                                 <p class="text-xs text-gray-500 mt-1">Costo: ${{ p.costo }} | Venta: ${{ p.precio }}</p>
                                 <p class="text-[11px] font-semibold text-green-600">Margen por unidad: ${{ "%.2f"|format(p.precio - p.costo) }}</p>
                             </div>

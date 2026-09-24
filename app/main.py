@@ -98,3 +98,23 @@ def vender_producto(
         db.commit()
         
     return RedirectResponse(url="/", status_code=303)
+@app.post("/eliminar_producto")
+def eliminar_producto(
+    producto_id: int = Form(...), 
+    db: Session = Depends(get_db),
+    usuario: str = Depends(verificar_usuario)
+):
+    producto = db.query(models.Producto).filter(models.Producto.id == producto_id).first()
+    if producto:
+        db.delete(producto)
+        db.commit()
+    return RedirectResponse(url="/", status_code=303)
+
+@app.post("/resetear_ventas")
+def resetear_ventas(
+    db: Session = Depends(get_db),
+    usuario: str = Depends(verificar_usuario)
+):
+    db.query(models.Venta).delete()
+    db.commit()
+    return RedirectResponse(url="/", status_code=303)
