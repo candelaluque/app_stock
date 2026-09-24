@@ -1,5 +1,7 @@
 # Sistema de Gestión de Stock
 
+**Deploy en vivo:** (https://controlastock.onrender.com/) *(Acceso restringido por credenciales de seguridad del cliente en producción)*.
+
 Una aplicación web responsiva (PWA) diseñada para el control de stock, registro de ventas y analisis de margenes de ganancia para un comercio local. Desarrollada con un enfoque para ser operada desde dispositivos móviles en el punto de venta.
 
 ## Características Principales
@@ -16,6 +18,9 @@ Una aplicación web responsiva (PWA) diseñada para el control de stock, registr
 *   **Base de Datos:** PostgreSQL (Despliegue) / SQLite (Desarrollo), SQLAlchemy (ORM).
 *   **Frontend:** HTML5, Jinja2 (Templating), TailwindCSS.
 *   **Despliegue (Deploy):** Render (Web Service), Neon (Serverless Postgres).
+
+## Vista previa
+<img width="502" height="728" alt="gif app stock" src="https://github.com/user-attachments/assets/56b8c24e-e3a2-4177-ae39-049e2214385a" />
 
 ## Instalación y Ejecución Local
 
