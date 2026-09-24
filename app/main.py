@@ -106,8 +106,12 @@ def eliminar_producto(
 ):
     producto = db.query(models.Producto).filter(models.Producto.id == producto_id).first()
     if producto:
+        # 1. Primero borramos las ventas asociadas a este producto
+        db.query(models.Venta).filter(models.Venta.producto_id == producto_id).delete()
+        
         db.delete(producto)
         db.commit()
+        
     return RedirectResponse(url="/", status_code=303)
 
 @app.post("/resetear_ventas")
